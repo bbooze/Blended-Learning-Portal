@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>When a training course is in Draft status for 6 months, the record owner (training admin) should receive an email alert letting them know they have a training record that has been in draft status for 6 months.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>BLP Training In Draft For 6 Months</name>
+    <style>none</style>
+    <subject>Training In Draft For 6 Months</subject>
+    <textOnly>Hi {!BLP_Course__c.OwnerFullName}, 
+The Training Path &apos;{!BLP_Course__c.BLP_Course_Name__c}&apos; you drafted on {!BLP_Course__c.BLP_Draft_Status_Updated_On__c} is still in Draft status.</textOnly>
+    <type>custom</type>
+</EmailTemplate>

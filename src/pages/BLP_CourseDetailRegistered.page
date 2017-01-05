@@ -1,0 +1,129 @@
+<apex:page sidebar="false" showHeader="false" controller="BLP_CourseDetailRegisteredController">
+    <div id="overlay"/>
+    <apex:composition template="BLP_Template">
+        <apex:define name="body">
+            <apex:form >
+                <apex:actionFunction action="{!DeregisterUser}" name="deregisterUserAF" reRender="none">
+                    <apex:param assignTo="{!registerOrWaitlist}" name="param1" value=""/>
+                </apex:actionFunction>
+                
+                <apex:actionFunction action="{!updatePreWork}" name="preWorkAF" reRender="preWorkPanel" oncomplete="hideLoading();"/>
+                <apex:actionFunction action="{!updateePostWork}" name="postWorkAF" reRender="postWorkPanel" oncomplete="hideLoading();"/>
+                
+                <div id="page-wrapper">
+                    <div class="container-fluid  no-padding">
+                        <section class="page-content-main">
+                            <div class="page-title">
+                                <h2>{!subscribedCourseRegistered.CourseName}</h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-sm-7 lc-left">
+                                    <div class="lc-details">
+                                        <ul class="list-unstyled no-padding no-margin">
+                                            <li style="display:{!IF(subscribedCourseRegistered.trainingPathSize,'','none')}">
+                                                <label>{!$Label.BLP_Training_Path}:</label>
+                                                <apex:repeat value="{!subscribedCourseRegistered.trainingPathsMap}" var="paths">
+                                                     <a href="{!subscribedCourseRegistered.trainingPathsMap[paths]}" class="underlined">{!paths}</a>
+                                                 </apex:repeat>
+                                            </li>
+                                            <li style="display:{!IF(subscribedCourseRegistered.prerequisiteSize ,'','none')}">
+                                                <label>{!$Label.BLP_Pre_requisite}:</label>
+                                                <apex:repeat value="{!subscribedCourseRegistered.PreRequisiteMap}" var="pre">
+                                                     <a href="https://{!subscribedCourseRegistered.PreRequisiteMap[pre]}" target="_blank" class="underlined">{!pre}</a>
+                                                 </apex:repeat>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <apex:outputPanel rendered="{!subscribedCourseRegistered.CourseMandatory}">
+                                        <p>{!$Label.BLP_This_Course_Is} <strong>{!$Label.BLP_Mandatory}.</strong></p>
+                                    </apex:outputPanel>
+                                    <apex:outputText value="{!subscribedCourseRegistered.CourseDescription}" escape="false"/>  
+                                </div>
+                                <div class="col-md-4 col-sm-5 lc-right"> 
+                                    <div class="register-section">
+                                        <div class="lc-blocks text-center">
+                                            <button href="#" class="btn btn-primary register-btn" onclick="deregisterUserAF('{!subscribedCourseRegistered.userToCourceRegisterOrWait}');return false;">
+                                                {!$Label.BLP_Deregister} <label style="display:{!IF(subscribedCourseRegistered.userToCourceRegisterOrWait == 'Waitlisted','','none')}">{!$Label.BLP_For_Waitlist}</label>
+                                            </button>
+                                            <div class="date-time-location">
+                                                <span>{!subscribedCourseRegistered.currentlyRegisteredDate}</span>
+                                            </div>
+                                        </div>
+                                        <div class="lc-blocks text-left user-details">
+                                            <ul class="list-unstyled no-padding no-margin">
+                                                <li style="display:{!IF(AND(subscribedCourseRegistered.courseExpertName != null, subscribedCourseRegistered.courseExpertName != ''),'','none')}">
+                                                    <label>{!$Label.BLP_Course_Expert}:</label>
+                                                    <span>
+                                                        <a href="mailto:{!subscribedCourseRegistered.courseExpertEmail}" target="_blank" class="underlined">{!subscribedCourseRegistered.courseExpertName}</a>
+                                                    </span>
+                                                </li>
+                                                <li style="display:{!IF(AND(subscribedCourseRegistered.techExpertName != null, subscribedCourseRegistered.techExpertName != ''),'','none')}">
+                                                    <label>{!$Label.BLP_Tech_Support}:</label>
+                                                    <span>
+                                                        <a href="mailto:{!subscribedCourseRegistered.techExpertEmail}" target="_blank" class="underlined">{!subscribedCourseRegistered.techExpertName}</a>
+                                                    </span>
+                                                </li>
+                                                <li style="display:{!IF(AND(subscribedCourseRegistered.CourseType != null, subscribedCourseRegistered.CourseType != ''),'','none')}">
+                                                    <label>{!$Label.BLP_Type}:</label>
+                                                    <span>{!subscribedCourseRegistered.CourseType}</span>
+                                                </li>
+                                                <li style="display:{!IF(AND(subscribedCourseRegistered.CourseStatus != null, subscribedCourseRegistered.CourseStatus != ''),'','none')}">
+                                                    <label>{!$label.BLP_Status}:</label>
+                                                    <span>{!subscribedCourseRegistered.CourseStatus}</span>
+                                                </li>
+                                                <li>
+                                                    <label>{!$Label.BLP_Rating}:</label>
+                                                    <ul class="list-inline rating">
+                                                        <li class="no-margin"><i class="zmdi zmdi-star red-fill"></i></li>
+                                                        <li class="no-margin"><i class="zmdi zmdi-star red-fill"></i></li>
+                                                        <li class="no-margin"><i class="zmdi zmdi-star red-fill"></i></li>
+                                                        <li class="no-margin"><i class="zmdi zmdi-star red-fill"></i></li>
+                                                        <li class="no-margin"><i class="zmdi zmdi-star"></i></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="lc-blocks text-left user-links" style="display:{!IF(preWorkList.size > 0,'','none')}">
+                                            <apex:outputPanel id="preWorkPanel">
+                                                <ul class="list-unstyled no-padding no-margin">
+                                                    <span style="display:{!IF(preWorkList.size > 0,'','none')}"><b>{!$Label.BLP_Pre_Work}</b></span>
+                                                    <apex:repeat value="{!preWorkList}" var="work">
+                                                        <li>
+                                                           <apex:inputCheckbox value="{!work.completed}" title="{!$Label.BLP_Completed}" disabled="{!work.completed}"/>&nbsp;&nbsp;
+                                                           <a href="{!work.url}">{!work.name}</a>
+                                                        </li>
+                                                    </apex:repeat>
+                                                    <br/>
+                                                    <button href="#" class="btn btn-primary register-btn" onclick="showLoading();preWorkAF();return false;">{!$Label.BLP_Mark_Complete}</button>
+                                                </ul>
+                                            </apex:outputPanel>
+                                        </div>
+                                        
+                                        <div class="lc-blocks text-left user-links" style="display:{!IF(postWorkList.size > 0,'','none')}">
+                                            <apex:outputPanel id="postWorkPanel">
+                                                <ul class="list-unstyled no-padding no-margin">
+                                                    <span style="display:{!IF(postWorkList.size > 0,'','none')}"><b>{!$Label.BLP_Post_Work}</b></span>
+                                                    <apex:repeat value="{!postWorkList}" var="work">
+                                                        <li>
+                                                           <apex:inputCheckbox value="{!work.completed}" title="{!$Label.BLP_Completed}" disabled="{!work.completed}"/>&nbsp;&nbsp;
+                                                           <a href="{!work.url}">{!work.name}</a>
+                                                        </li>
+                                                    </apex:repeat>
+                                                    <br/>
+                                                    <button href="#" class="btn btn-primary register-btn" onclick="showLoading();postWorkAF();return false;">{!$Label.BLP_Mark_Complete}</button>
+                                                </ul>
+                                            </apex:outputPanel>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </section>
+                    </div>
+                </div>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+    
+</apex:page>

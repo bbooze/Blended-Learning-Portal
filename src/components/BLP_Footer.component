@@ -1,0 +1,28 @@
+<apex:component >
+    <footer class="footer">
+        <div class="footer-primary"> 
+            <a href="#" class="pull-left">
+                <div class="footer-logo"></div>
+            </a>
+            <div class="contact-copyright pull-right">
+                <div class="contact-numbers"> 
+                    {!$Label.BLP_EMERGENCY}: 
+                    <span class="call-style">
+                        {!$Label.BLP_Emergency_Number_1}
+                    </span> 
+                    {!$Label.BLP_OR}
+                    <span class="call-style">
+                       {!$Label.BLP_Emergency_Number_2}
+                    </span>
+                </div>
+                <p>{!$Label.BLP_Copyright}</p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="footer-secoandry">
+            <div class="disclaimer pull-left">{!$Label.BLP_Disclaimer}:</div>
+                <p class="pull-right">{!$Label.BLP_Disclaimer_Text}</p>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+</apex:component>

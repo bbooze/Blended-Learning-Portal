@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Course Summary Notification Mail Template</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>BLP Course Summary Notification Mail Template</name>
+    <style>none</style>
+    <subject>Course Summary Notification Mail</subject>
+    <textOnly>Course Summary Notification Mail Template</textOnly>
+    <type>custom</type>
+</EmailTemplate>

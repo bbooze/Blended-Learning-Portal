@@ -1,0 +1,41 @@
+<apex:page sidebar="false" showHeader="false" controller="BLP_CourseDetailLinkController">
+    <apex:composition template="BLP_Template">
+        <apex:define name="body">
+            <div id="page-wrapper">
+                <div class="container-fluid  no-padding">
+                    <section class="page-content-main">
+                        <div class="page-title">
+                            <h2>{!subscribedCourseDetail.CourseName}</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-sm-7 lc-left">
+                                <div class="lc-details">
+                                    <ul class="list-unstyled no-padding no-margin">
+                                        <li style="display:{!IF(subscribedCourseDetail.trainingPathSize,'','none')}">
+                                            <label>{!$Label.BLP_Training_Path}:</label>
+                                            <apex:repeat value="{!subscribedCourseDetail.trainingPathsMap}" var="paths">
+                                                <a href="{!subscribedCourseDetail.trainingPathsMap[paths]}" class="underlined">{!paths}</a>
+                                            </apex:repeat>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <apex:outputPanel rendered="{!subscribedCourseDetail.CourseMandatory}">
+                                    <p>{!$Label.BLP_This_Course_Is} <strong>{!$Label.BLP_Mandatory}.</strong></p>
+                                </apex:outputPanel>
+                                <apex:outputText value="{!subscribedCourseDetail.CourseDescription}" escape="false"/>
+                            </div>
+                            <div class="col-md-4 col-sm-5 lc-right">
+                                <div class="register-section">
+                                    <div class="lc-blocks text-center">
+                                        <button href="#" class="btn btn-primary register-btn">{!$Label.BLP_View}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </section>
+                </div>
+            </div>
+        </apex:define>
+    </apex:composition>
+</apex:page>

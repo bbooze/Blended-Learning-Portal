@@ -1,0 +1,206 @@
+<apex:page sidebar="false" showHeader="false" controller="BLP_CourseDetailUnregisteredController">
+    <div id="overlay"></div>
+    <apex:composition template="BLP_Template">
+        <apex:define name="body">
+            <apex:form id="frm">
+                <apex:actionFunction action="{!registerUser}" name="registerUserAF" reRender="infoPanel">
+                    <apex:param assignTo="{!selectedDate}" name="param1" value=""/>
+                    <apex:param assignTo="{!registerOrWaitlist}" name="param2" value=""/>
+                </apex:actionFunction>
+                
+                <apex:actionFunction action="{!DeregisterUser}" name="deregisterUserAF" oncomplete="ChangeButton();">
+                    <apex:param assignTo="{!registerOrWaitlist}" name="param1" value=""/>
+                    <apex:param assignTo="{!canRegisterAlso}" name="param2" value=""/>
+                </apex:actionFunction>
+                <apex:actionFunction action="{!redirectUser}" name="redirectUserAF" reRender="" status="loadStatus">
+                    <apex:param assignTo="{!prerequisiteCourseId}" name="param1" value=""/>
+                </apex:actionFunction>
+                <apex:actionstatus id="loadStatus">
+                    <apex:facet name="start">
+                        <div class="waitingSearchDiv" style="top:45%; width:100%; height:100%;opacity:0.7; z-index:5;">
+                            <img class="waitingImage" src="{!URLFOR($Resource.BLP_Resources,'/images/loading_spinner.gif')}" title="Please Wait..."/>
+                        </div>
+                    </apex:facet>
+                </apex:actionstatus>  
+                <div id="page-wrapper">
+                    <div class="container-fluid  no-padding">
+                         <section class="page-content-main">
+                           <apex:outputPanel id="infoPanel" layout="block">
+                             <apex:outputPanel layout="block" styleClass="alert alert-warning" rendered="{!IF(ISBLANK(prerequisiteCourseLink), false, true)}">
+                                 <strong> INFO! </strong><apex:outputText value="{!$Label.BLP_Has_A_Prerequisite} {!prerequisiteCourseLink}" escape="false"/>
+                             </apex:outputPanel>
+                           </apex:outputPanel>   
+                             <!--<apex:repeat value="{!AddidtionalCoursesList}" var="course">-->
+                                 <div class="page-title">
+                                     <h2>{!subscribedCourseUnregistered.CourseName}</h2>
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-md-8 col-sm-7 lc-left">
+                                         <div class="lc-details">
+                                             <ul class="list-unstyled no-padding no-margin">
+                                                 <li class="no-margin" style="display:{!IF(subscribedCourseUnregistered.trainingPathSize,'','none')}">
+                                                     <label>{!$Label.BLP_Training_Path}:</label>
+                                                     <apex:repeat value="{!subscribedCourseUnregistered.trainingPathsMap}" var="paths">
+                                                         <a href="{!subscribedCourseUnregistered.trainingPathsMap[paths]}" class="underlined">{!paths}</a>
+                                                     </apex:repeat>
+                                                 </li>
+                                                 <li class="no-margin" style="display:{!IF(subscribedCourseUnregistered.prerequisiteSize ,'','none')}">
+                                                     <label>{!$Label.BLP_Pre_requisite}:</label>
+                                                     <apex:repeat value="{!subscribedCourseUnregistered.PreRequisiteMap}" var="pre">
+                                                         <apex:outputText value="{!subscribedCourseUnregistered.PreRequisiteMap[pre]}" escape="false"/>
+                                                     </apex:repeat>
+                                                 </li>
+                                             </ul>
+                                         </div>
+                                         <apex:outputPanel rendered="{!subscribedCourseUnregistered.CourseMandatory}">
+                                             <p>{!$Label.BLP_This_Course_Is} <strong>{!$Label.BLP_Mandatory}.</strong></p>
+                                         </apex:outputPanel>
+                                         <apex:outputText value="{!subscribedCourseUnregistered.CourseDescription}" escape="false"/> 
+                                         <apex:outputPanel rendered="false">
+                                         <ul>
+                                             <li><a href="#" class="underlined">External document link </a></li>
+                                             <li><a href="#" class="underlined">External document link </a></li>
+                                             <li><a href="#" class="underlined">External document link </a></li>
+                                         </ul>
+                                         </apex:outputPanel>
+                                     </div>
+                                     <div class="col-md-4 col-sm-5 lc-right"> 
+                                         <div class="register-section">
+                                             <div class="lc-blocks text-center">
+                                                 <apex:outputPanel id="buttons">
+                                                     <button id="DeregisterButton" style="display:{!IF(subscribedCourseUnregistered.userToCourceRegisterOrWait == 'Waitlisted','','none')}" 
+                                                        onclick="derigisterUser('{!subscribedCourseUnregistered.userToCourceRegisterOrWait}');return false;" 
+                                                        class="btn btn-primary register-btn">{!$Label.BLP_Deregister} {!$Label.BLP_For_Waitlist}</button>
+                                                     <button id="registerButton" onclick="registerUser();return false;" class="btn btn-primary register-btn">{!$Label.BLP_Register}</button>
+                                                 </apex:outputPanel>
+                                                 <apex:outputPanel rendered="{!!OR(subscribedCourseUnregistered.trainingDatesWrapList == null, subscribedCourseUnregistered.trainingDatesWrapList.size == 0)}">
+                                                     <div class="select-box">
+                                                         <select id="timeSelect" Class="form-control" size="1" value="{!selectedDate}" onchange="ChangeButton();">
+                                                             <apex:repeat value="{!subscribedCourseUnregistered.trainingDatesWrapList}" var="trainingValue">
+                                                                 <option class="test" data-id="{!trainingValue.registeredTrainingId}" data-maxValue="{!trainingValue.maxCapacity}" Value="{!trainingValue.trainingId}">{!trainingValue.trainingDate} {!trainingValue.trainingTime} {!trainingValue.trainingLocation}</option>
+                                                             </apex:repeat>
+                                                         </select>
+                                                     </div>
+                                                </apex:outputPanel>
+                                                </div>
+                                                <div class="lc-blocks text-left user-details">
+                                                <ul class="list-unstyled no-padding no-margin">
+                                                    <li style="display:{!IF(AND(subscribedCourseUnregistered.courseExpertName != null, subscribedCourseUnregistered.courseExpertName != ''),'','none')}">
+                                                        <label>{!$Label.BLP_Course_Expert}:</label>
+                                                        <span>
+                                                            <a href="mailto:{!subscribedCourseUnregistered.courseExpertEmail}" target="_blank" class="underlined">{!subscribedCourseUnregistered.courseExpertName}</a>
+                                                        </span>
+                                                    </li>
+                                                    <li style="display:{!IF(AND(subscribedCourseUnregistered.techExpertName != null, subscribedCourseUnregistered.techExpertName != ''),'','none')}">
+                                                        <label>{!$Label.BLP_Tech_Support}:</label>
+                                                        <span>
+                                                            <a href="mailto:{!subscribedCourseUnregistered.techExpertEmail}" target="_blank" class="underlined">{!subscribedCourseUnregistered.techExpertName}</a>
+                                                        </span>
+                                                    </li>
+                                                    <li style="display:{!IF(AND(subscribedCourseUnregistered.CourseType != null, subscribedCourseUnregistered.CourseType != ''),'','none')}">
+                                                        <label>{!$Label.BLP_Type}:</label>
+                                                        <span>{!subscribedCourseUnregistered.CourseType}</span>
+                                                    </li>
+                                                    <li style="display:{!IF(AND(subscribedCourseUnregistered.CourseStatus != null, subscribedCourseUnregistered.CourseStatus != ''),'','none')}">
+                                                        <label>{!$Label.BLP_Status}:</label>
+                                                        <span>{!subscribedCourseUnregistered.CourseStatus}</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!--</apex:repeat>-->
+                            <div class="clearfix"></div>
+                        </section>
+                    </div>
+                </div>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+    <script>
+        function ChangeButton(){
+            if($('#timeSelect') != null && $('#timeSelect') != 'undefined'){
+                var maxValue = $('#timeSelect').find('option:selected').data('maxvalue');
+                var flagDisbale = false;
+                $("#timeSelect > option").each(function() {
+                    var dataId = $(this).data('id');
+                    if(dataId != null && dataId != '' && dataId != 'undefined'){
+                        console.log('dataId--->'+dataId);
+                        flagDisbale = true;
+                    }
+                });
+                console.log(maxValue + ' maxValue  ' +flagDisbale + ' flagDisbale ');
+                if(maxValue <= 0){
+                    $('#registerButton').text('{!$Label.BLP_Register}' + ' {!$Label.BLP_For_Waitlist}');
+                    if(flagDisbale){
+                        $('#registerButton').hide();
+                    }
+                    else{
+                        $('#registerButton').show();
+                    }
+                }
+                else{
+                    $('#registerButton').text('{!$Label.BLP_Register}');
+                }
+            }
+        }
+        
+        function registerUser(){
+            if($('#timeSelect') != null && $('#timeSelect') != 'undefined'){
+                var maxValue = $('#timeSelect').find('option:selected').data('maxvalue');
+                var dataId = $('#timeSelect').find('option:selected').data('id');
+                console.log(dataId);
+                if(maxValue <= 0){
+                    registerUserAF($('#timeSelect').val(),'Waitlisted');
+                }
+                else{
+                    registerUserAF($('#timeSelect').val(),'Register');
+                }
+                
+            }
+            else{
+                registerUserAF(null,'Register');
+            }
+        }
+        
+        function derigisterUser(status){
+            var maxValue = $('#timeSelect').find('option:selected').data('maxvalue');
+            if(maxValue <= 0){
+                deregisterUserAF(status,'true');
+            }
+            else{
+                deregisterUserAF(status,'false');
+                $('#DeregisterButton').hide();
+            }
+        }
+        
+        $(document).ready(function(){
+            //ChangeButton();
+            var flagDisbale = false;
+            $("#timeSelect > option").each(function() {
+                var dataId = $(this).data('id');
+                if(dataId != null && dataId != '' && dataId != 'undefined'){
+                    flagDisbale = true;
+                }
+            });
+            if(flagDisbale){
+                //$('#DeregisterButton').show();
+                $("#timeSelect > option").each(function() {
+                    var dataId = $(this).data('id');
+                    if(dataId != null && dataId != '' && dataId != 'undefined'){
+                         $(this).prop('selected', true);
+                    }
+                    else{
+                        $(this).attr('disabled','disabled');
+                    }
+                });
+            }
+            else{
+                $('#DeregisterButton').hide();
+            }
+            ChangeButton();
+        });
+    </script>
+    
+</apex:page>

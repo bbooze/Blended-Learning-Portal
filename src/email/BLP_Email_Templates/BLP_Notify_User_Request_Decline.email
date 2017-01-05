@@ -1,0 +1,8 @@
+<messaging:emailTemplate subject="Update: Your Request For Course Declined" recipientType="User" relatedToType="BLP_User_To_Course__c">
+<messaging:htmlEmailBody >
+Hi {!relatedTo.BLP_UserName__c},<BR/>
+<BR/>
+This is to inform you that your request for the course {!relatedTo.BLP_Course_Name__c} has been declined by the Training Administrator.<BR/> 
+Please Contact Training Administrator for futher detail.
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

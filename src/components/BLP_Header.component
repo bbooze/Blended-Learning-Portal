@@ -1,0 +1,44 @@
+<apex:component controller="BLP_HeaderController">
+    <nav class="navbar navbar-inverse navbar-fixed-top top-bar" role="navigation"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header"> 
+            <a class="navbar-brand" href="#">
+                <div class="logo-header"></div>
+            </a> 
+        </div>
+        <div class="navbar-ex1-collapse">
+            <div class="side-nav">
+                <button type="button" class=" drawer-toggle-btn"> </button>
+                <div class="user-name">{!$User.FirstName} {!$User.LastName}</div>
+                <ul class="nav navbar-nav main-links">
+                    <li class="{!IF($CurrentPage.name != 'BLP_CourseList','active','')} no-margin"> 
+                        <a href="{!$Page.BLP_MyTraining}"> {!$Label.BLP_My_Training}</a> 
+                    </li>
+                    <li class="{!IF($CurrentPage.name == 'BLP_CourseList','active','')} no-margin"> 
+                        <a href="{!$Page.BLP_CourseList}"> {!$Label.BLP_Course_List}</a> 
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+                <div class="globle-links">
+                    <ul class="list-unstyled">
+                        <apex:repeat value="{!quickLinksList}" var="quickLink">
+                          <li class="no-margin">
+                            <a href="{!quickLink.BLP_Link_URL__c}" target="_blank">{!quickLink.BLP_Name_of_Link__c}<i class="pull-right"></i></a>
+                          </li>
+                        </apex:repeat>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <!-- /.navbar-collapse --> 
+    </nav>
+    <div id="page-wrapper">
+        <div class="container-fluid  no-padding">
+            <div class="site-titel-wrap">
+                <div class="site-title">
+                    <h1>{!$Label.BLP_Blended_Learning_Portal}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:component>

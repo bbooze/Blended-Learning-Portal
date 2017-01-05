@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>BLP_Course_Name__c</fullName>
+        <formula>BLP_Course__r.BLP_Course_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Course Name</label>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Course__c</fullName>
+        <label>Course</label>
+        <referenceTo>BLP_Course__c</referenceTo>
+        <relationshipLabel>User To Course</relationshipLabel>
+        <relationshipName>User_To_Course</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <type>MasterDetail</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Date_of_Completion__c</fullName>
+        <label>Date of Completion</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Email__c</fullName>
+        <label>Email</label>
+        <type>Email</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Prework_Due_Days__c</fullName>
+        <label>Prework Due Days</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Prework_Not_Completed__c</fullName>
+        <label>Prework Not Completed</label>
+        <length>255</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Prework_Postwork_Copied__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Prework Postwork Copied</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Status__c</fullName>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Registered</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unregistered</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Attended</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Attended</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Registered Without Date</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Waitlisted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Removed Waitlisted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Training_Date__c</fullName>
+        <formula>BLP_Training_Dates__r.BLP_Training_Date_Time__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Training Date</label>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Training_Dates__c</fullName>
+        <label>Training Dates</label>
+        <referenceTo>BLP_Training_Dates__c</referenceTo>
+        <relationshipLabel>User To Course</relationshipLabel>
+        <relationshipName>User_To_Course</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BLP_Training_Location__c</fullName>
+        <formula>BLP_Training_Dates__r.BLP_Course_Location__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Training Location</label>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>BLP_UserName__c</fullName>
+        <formula>BLP_User__r.FirstName + &apos; &apos;+  BLP_User__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>BLP_UserName</label>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>BLP_User__c</fullName>
+        <label>User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>User_To_Course</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Training_DateTime_Google__c</fullName>
+        <formula>SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(BLP_Training_Date__c),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;T&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Training DateTime Google Format</label>
+        <type>Text</type>
+    </fields>
+    <label>User To Course</label>
+    <nameField>
+        <displayFormat>UC-{000000000}</displayFormat>
+        <label>Sequence Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>User To Course</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>
