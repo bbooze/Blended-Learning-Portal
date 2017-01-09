@@ -1,0 +1,7 @@
+Hi {!BLP_User_To_Course__c.BLP_UserName__c}, 
+<br/>
+<br/>
+A new member has joined Waitlisted for the course {!BLP_User_To_Course__c.BLP_Course_Name__c}.
+<br/>
+<br/>
+Thanks

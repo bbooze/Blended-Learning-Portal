@@ -1,0 +1,10 @@
+<messaging:emailTemplate subject="New Training Dates Are Available" recipientType="User" relatedToType="BLP_User_To_Course__c">
+<messaging:htmlEmailBody >
+Hi {!relatedTo.BLP_UserName__c},<BR/>
+<BR/>
+New Training Dates are added to your subscribed course.<BR/> 
+Please contact administrator to confirm your training date.<BR/> 
+<BR/>
+Course Name - {!relatedTo.BLP_Course_Name__c}<BR/>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

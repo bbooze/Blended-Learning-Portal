@@ -1,0 +1,36 @@
+<messaging:emailTemplate subject="Thank You For Registering Course" recipientType="User" relatedToType="BLP_User_To_Course__c">
+<messaging:htmlEmailBody >
+Hi,<BR/>
+<BR/>
+You have successfully registered for the course.<BR/>
+Here are the following details for the course you are enrolled -<BR/>
+Course Name - {!relatedTo.BLP_Course_Name__c}<BR/>
+Training Date - {!relatedTo.BLP_Training_Date__c}<BR/>
+Location - {!relatedTo.BLP_Training_Location__c}<BR/>
+<BR/>
+<a
+href="http://www.google.com/calendar/event?action=TEMPLATE&text=Attend%20Course%20{!relatedTo.BLP_Course_Name__c}&details=You%20are%20registered%20for%20{!relatedTo.BLP_Course_Name__c}&dates={!relatedTo.Training_DateTime_Google__c}/{!relatedTo.Training_DateTime_Google__c}&location={!relatedTo.BLP_Training_Location__c}">
+    <span style="line-height:19px;height:19px;vertical-align:middle;display:inline-block;">Add to Google Calendar</span>
+</a>
+</messaging:htmlEmailBody>
+<messaging:attachment filename="Add to Outlook.ics">
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID::-//hacksw/handcal//NONSGML v1.0//EN
+BEGIN:VEVENT
+DTSTAMP;TZID=GMT:<apex:outputText value="{!relatedTo.Training_DateTime_Google__c}"/>
+UID:<apex:outputText value="{!relatedTo.Id}"/>
+DTSTART;TZID=GMT:<apex:outputText value="{!relatedTo.Training_DateTime_Google__c}"/>
+DTEND;TZID=GMT:<apex:outputText value="{!relatedTo.Training_DateTime_Google__c}"/>
+SUMMARY:<apex:outputText value="Attend Course {!relatedTo.BLP_Course_Name__c}"/>
+DESCRIPTION:<apex:outputText value="You are registered for {!relatedTo.BLP_Course_Name__c}"/>
+LOCATION:<apex:outputText value="{!relatedTo.BLP_Training_Location__c}"/>
+BEGIN:VALARM
+TRIGGER:-PT1D
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR
+</messaging:attachment>
+</messaging:emailTemplate>

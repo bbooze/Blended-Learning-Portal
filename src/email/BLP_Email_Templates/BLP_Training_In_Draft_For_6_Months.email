@@ -1,0 +1,2 @@
+Hi {!BLP_Course__c.OwnerFullName},<BR/>
+The Training Path '{!BLP_Course__c.BLP_Course_Name__c}' you drafted on {!BLP_Course__c.BLP_Draft_Status_Updated_On__c} is still in Draft status.

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Email_Alert_To_Users</name>
+        <label>Send Email Alert To Users</label>
+        <locationX>782</locationX>
+        <locationY>349</locationY>
+        <actionName>BLP_User_To_Course__c.BLP_Training_Dates_Updated</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Loop_Through_The_UserToCourseSet</targetReference>
+        </connector>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>UserToCourse.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <decisions>
+        <name>Is_User_Registered</name>
+        <label>Is User Registered</label>
+        <locationX>776</locationX>
+        <locationY>190</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Through_The_UserToCourseSet</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>User Not Registered</defaultConnectorLabel>
+        <rules>
+            <name>User_Registered</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>UserToCourse.BLP_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Registered</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Email_Alert_To_Users</targetReference>
+            </connector>
+            <label>User Registered</label>
+        </rules>
+    </decisions>
+    <interviewLabel>BLP Send Email To User On Training Dates Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>BLP Send Email To User On Training Dates Update</label>
+    <loops>
+        <name>Loop_Through_The_UserToCourseSet</name>
+        <label>Loop Through The UserToCourseSet</label>
+        <locationX>507</locationX>
+        <locationY>187</locationY>
+        <assignNextValueToReference>UserToCourse</assignNextValueToReference>
+        <collectionReference>UserToCourseSet</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Is_User_Registered</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_User_To_Courses_From_Related_Courses</name>
+        <label>Get User To Courses From Related Courses</label>
+        <locationX>507</locationX>
+        <locationY>61</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_The_UserToCourseSet</targetReference>
+        </connector>
+        <filters>
+            <field>BLP_Course__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>TrainingDate.BLP_Course__c</elementReference>
+            </value>
+        </filters>
+        <object>BLP_User_To_Course__c</object>
+        <outputReference>UserToCourseSet</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>BLP_Email__c</queriedFields>
+        <queriedFields>BLP_Status__c</queriedFields>
+        <queriedFields>BLP_User__c</queriedFields>
+    </recordLookups>
+    <startElementReference>Get_User_To_Courses_From_Related_Courses</startElementReference>
+    <variables>
+        <name>TrainingDate</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>BLP_Training_Dates__c</objectType>
+    </variables>
+    <variables>
+        <name>UserToCourse</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>BLP_User_To_Course__c</objectType>
+    </variables>
+    <variables>
+        <name>UserToCourseSet</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>BLP_User_To_Course__c</objectType>
+    </variables>
+</Flow>

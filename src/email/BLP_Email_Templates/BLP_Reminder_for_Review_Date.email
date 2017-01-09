@@ -1,0 +1,11 @@
+<messaging:emailTemplate subject="Remainder: Please Review The Course" recipientType="User" relatedToType="BLP_Course__c">
+<messaging:htmlEmailBody >
+Hi {!relatedTo.Owner.Name},<BR/>
+<BR/>
+Please review the course detail as Review Date is &nbsp;
+<apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+        <apex:param value="{!relatedTo.BLP_Review_Date__c}"/>
+</apex:outputText> 
+for the course {!relatedTo.BLP_Course_Name__c} <BR/>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

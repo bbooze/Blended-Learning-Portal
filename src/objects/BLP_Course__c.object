@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>BLP_Affiliate__c</fullName>
+        <externalId>false</externalId>
         <label>Affiliate</label>
         <picklist>
             <picklistValues>
@@ -32,21 +84,30 @@
                 <fullName>Canada</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
+        <required>false</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Audience__c</fullName>
         <description>LABEL_VALUE_AUDIENCE from the Success Factors Integration</description>
+        <externalId>false</externalId>
         <inlineHelpText>LABEL_VALUE_AUDIENCE</inlineHelpText>
         <label>Audience</label>
         <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Availability__c</fullName>
+        <externalId>false</externalId>
         <label>Availability</label>
         <picklist>
             <picklistValues>
@@ -57,39 +118,62 @@
                 <fullName>Open</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Classification__c</fullName>
         <description>Classification from Success Factors Integration : Classification</description>
+        <externalId>false</externalId>
         <label>Classification</label>
         <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Component_Type_Id__c</fullName>
         <description>CPNT_TYP_ID for SuccessFactors Integration : CPNT_TYP_ID</description>
+        <externalId>false</externalId>
         <label>Component Type Id</label>
         <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Course_Expert_Email__c</fullName>
+        <externalId>false</externalId>
         <label>Course Expert Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Email</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Course_Expert__c</fullName>
+        <externalId>false</externalId>
         <label>Course Expert</label>
         <length>255</length>
+        <required>false</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Course_Format__c</fullName>
+        <externalId>false</externalId>
         <label>Course Format</label>
         <picklist>
             <picklistValues>
@@ -108,22 +192,30 @@
                 <fullName>eLearning</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>true</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Course_Name__c</fullName>
         <description>LABEL_VALUE_TITLE Integration Field Mapping Name</description>
+        <externalId>false</externalId>
         <label>Course Name</label>
         <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Course_Summary_Notifications_Days__c</fullName>
         <description>Used to select what number of days in advance of a training does the training admin want to be notified of the registeration summary for attendees.</description>
+        <externalId>false</externalId>
         <label>Course Summary Notifications (Days)</label>
         <picklist>
             <picklistValues>
@@ -138,13 +230,18 @@
                 <fullName>15</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Delivery_Method__c</fullName>
         <description>DEL_MTH_ID from Success Factors Integration : DEL_MTH_ID</description>
+        <externalId>false</externalId>
         <label>Delivery Method</label>
         <picklist>
             <picklistValues>
@@ -159,31 +256,48 @@
                 <fullName>DOC</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Description__c</fullName>
         <description>LABEL_VALUE_DESC Mapping Id From Informatica</description>
+        <externalId>false</externalId>
         <label>Description</label>
         <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Html</type>
         <visibleLines>10</visibleLines>
     </fields>
     <fields>
         <fullName>BLP_Draft_Status_Updated_On__c</fullName>
+        <externalId>false</externalId>
         <label>Draft Status Updated On</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
     <fields>
         <fullName>BLP_Global_ID__c</fullName>
+        <externalId>false</externalId>
         <label>Global ID</label>
         <length>7</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Language_of_Instruction__c</fullName>
+        <externalId>false</externalId>
         <label>Language of Instruction</label>
         <picklist>
             <controllingField>BLP_Affiliate__c</controllingField>
@@ -217,61 +331,102 @@
                 <default>false</default>
                 <controllingFieldValues>Canada</controllingFieldValues>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>true</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Locale__c</fullName>
         <description>LOCALE_ID</description>
+        <externalId>false</externalId>
+        <globalPicklist>BLP_Locale</globalPicklist>
         <inlineHelpText>LOCALE_ID</inlineHelpText>
         <label>Locale</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Mandatory__c</fullName>
         <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
         <label>Mandatory</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>BLP_Prerequiste_Course__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
         <label>Prerequisite Course</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>$Source.BLP_Status__c</field>
+                <operation>equals</operation>
+                <value>Active</value>
+            </filterItems>
+            <filterItems>
+                <field>$Source.Id</field>
+                <operation>notEqual</operation>
+                <valueField>BLP_Course__c.Id</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
         <referenceTo>BLP_Course__c</referenceTo>
         <relationshipLabel>Dependent Courses</relationshipLabel>
         <relationshipName>Prerequisite_Courses</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
     <fields>
         <fullName>BLP_Responsible_Area__c</fullName>
         <description>USER_VALUE_RESP from Successfactors Integration</description>
+        <externalId>false</externalId>
         <inlineHelpText>USER_VALUE_RESP</inlineHelpText>
         <label>Responsible Area</label>
         <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Review_Date__c</fullName>
+        <externalId>false</externalId>
         <label>Review Date</label>
         <required>true</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
     <fields>
         <fullName>BLP_Review_Reminder_Date__c</fullName>
+        <externalId>false</externalId>
         <formula>IF(
   ISPICKVAL(BLP_Review_Reminder_Notifications_Months__c, &quot;12&quot;),
   (DATE((YEAR(BLP_Review_Date__c) - 1),MONTH(BLP_Review_Date__c),DAY(BLP_Review_Date__c))),
   IF(ISPICKVAL(BLP_Review_Reminder_Notifications_Months__c, &quot;6&quot;),BLP_Review_Date__c - (6 * 30 + 2), IF(ISPICKVAL(BLP_Review_Reminder_Notifications_Months__c, &quot;3&quot;),BLP_Review_Date__c - (3 * 30 + 1),BLP_Review_Date__c)))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Review Reminder Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
     <fields>
         <fullName>BLP_Review_Reminder_Notifications_Months__c</fullName>
         <description>The number of days before the review date that an admin wants to be reminded of the course review.</description>
+        <externalId>false</externalId>
         <label>Review Reminder Notifications (Months)</label>
         <picklist>
             <picklistValues>
@@ -286,20 +441,26 @@
                 <fullName>12</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>true</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Send_Review_Date_Notifications__c</fullName>
         <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
         <label>Send Review Date Notifications</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>BLP_Status__c</fullName>
+        <externalId>false</externalId>
         <label>Status</label>
         <picklist>
             <picklistValues>
@@ -322,10 +483,12 @@
                 <fullName>Replaced</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>true</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -335,23 +498,36 @@
         <externalId>true</externalId>
         <label>Success Factors Ext ID</label>
         <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
     </fields>
     <fields>
         <fullName>BLP_Tech_Support_Email__c</fullName>
+        <externalId>false</externalId>
         <label>Tech Support Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Email</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Tech_Support__c</fullName>
+        <externalId>false</externalId>
         <label>Tech Support</label>
         <length>255</length>
+        <required>false</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Time_in_Draft_Status__c</fullName>
+        <externalId>false</externalId>
         <formula>IF( NOT(ISNULL(BLP_Draft_Status_Updated_On__c)), 
 TEXT(IF(
 YEAR(TODAY()) = YEAR(BLP_Draft_Status_Updated_On__c ), 
@@ -360,10 +536,15 @@ FLOOR((TODAY() - BLP_Draft_Status_Updated_On__c ) / 30)
 )) + &apos; Months&apos;,&apos;&apos;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Time in Draft Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BLP_Training_Categories__c</fullName>
+        <externalId>false</externalId>
         <label>Training Categories</label>
         <picklist>
             <picklistValues>
@@ -394,17 +575,24 @@ FLOOR((TODAY() - BLP_Draft_Status_Updated_On__c ) / 30)
                 <fullName>My Job</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>BLP_Version__c</fullName>
+        <externalId>false</externalId>
         <label>Version</label>
         <length>255</length>
+        <required>false</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <label>Course</label>
     <listViews>
@@ -419,10 +607,12 @@ FLOOR((TODAY() - BLP_Draft_Status_Updated_On__c ) / 30)
         <columns>BLP_Language_of_Instruction__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+        <language>en_US</language>
     </listViews>
     <nameField>
         <displayFormat>C-{0000}</displayFormat>
         <label>Course Seq No</label>
+        <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Courses</pluralLabel>
@@ -436,5 +626,5 @@ FLOOR((TODAY() - BLP_Draft_Status_Updated_On__c ) / 30)
         <searchResultsAdditionalFields>BLP_Course_Name__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>BLP_Course_Format__c</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

@@ -1,0 +1,53 @@
+<apex:page standardController="BLP_Training_Path_Template__c" extensions="BLP_CreateTrainingPathController">
+    <style>
+        .verticalLine {
+            border-left: thick solid black;
+        }
+        .borderDiv{
+            width:33%;
+            display:inline-block;
+            float: left;
+        }
+        
+    </style>
+    
+    <apex:form >
+        <div>
+            <div class="borderDiv">
+                <apex:inputText value="{!serchCurriculumStr}" html-placeholder="Search Curriculum"/>
+                <br/><br/>
+                <table border="1">
+                    <tr>
+                        <th>Order</th>
+                        <th>Title</th>
+                    </tr>
+                    <apex:repeat value="{!SearchedCurriculums}" var="cur">
+                        <tr>
+                            <td>{!cur.order}</td>
+                            <td>{!cur.curriculumTitle}</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </div>
+            <div class="verticalLine"></div>
+            <div class="borderDiv" border="1">
+                <apex:inputText value="{!serchCourseStr}" html-placeholder="Search Course"/>
+                <br/><br/>
+                <table>
+                    <tr>
+                        <th>Title</th>
+                    </tr>
+                    <apex:repeat value="{!SearchedCourses}" var="course">
+                        <tr>
+                            <td>{!course.courseName}</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </div>
+            <div class="verticalLine"></div>
+            <div class="borderDiv">
+                <apex:inputText value="{!serchCourseStr}" html-placeholder="Training Path Name"/>
+            </div>
+        </div>
+    </apex:form>
+</apex:page>

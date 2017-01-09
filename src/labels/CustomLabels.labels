@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+<labels>
+        <fullName>BLP_Additional_Subscribed_Courses</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Additional Subscribed Courses</shortDescription>
+        <value>Additional Subscribed Courses</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Blended_Learning_Portal</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Blended Learning Portal</shortDescription>
+        <value>Blended Learning Portal</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Completed</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Completed</shortDescription>
+        <value>Completed</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Copyright</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Copyright</shortDescription>
+        <value>Copyright © 2016 Eli Lilly and Company. All rights reserved.</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Course_Expert</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Course Expert</shortDescription>
+        <value>Course Expert</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Course_List</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Course List</shortDescription>
+        <value>Course List</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Deregister</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Deregister</shortDescription>
+        <value>Deregister</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Disclaimer</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Disclaimer</shortDescription>
+        <value>DISCLAIMER</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Disclaimer_Text</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Disclaimer Text</shortDescription>
+        <value>While Lilly has made every effort to make the information here as accurate as possible, Lilly’s compensation and benefit programs and other services are detailed in separate official documents. The company reserves the right to amend, modify, suspend or terminate its programs and services at any time to the extent permitted by applicable law.</value>
+    </labels>
+    <labels>
+        <fullName>BLP_EMERGENCY</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Emergency</shortDescription>
+        <value>EMERGENCY</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Emergency_Number_1</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Emergency Number 1</shortDescription>
+        <value>555</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Emergency_Number_2</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Emergency Number 2</shortDescription>
+        <value>+1 317-227-0016</value>
+    </labels>
+    <labels>
+        <fullName>BLP_For_Waitlist</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP For Waitlist</shortDescription>
+        <value>for waitlist</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Has_A_Prerequisite</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Has A Prerequisite</shortDescription>
+        <value>This Course has a prerequisite course</value>
+    </labels>
+    <labels>
+        <fullName>BLP_In_Progress</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP In Progress</shortDescription>
+        <value>In Progress</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Language_Specific</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Language Specific</shortDescription>
+        <value>Language Specific</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Mandatory</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Mandatory</shortDescription>
+        <value>Mandatory</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Mark_Complete</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Mark Complete</shortDescription>
+        <value>Mark Complete</value>
+    </labels>
+    <labels>
+        <fullName>BLP_My_Training</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP My Training</shortDescription>
+        <value>My Training</value>
+    </labels>
+    <labels>
+        <fullName>BLP_No_Training_Path</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP No Training Path</shortDescription>
+        <value>No Training Paths Subscribed</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Not_Registered</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Not Registered</shortDescription>
+        <value>Not Registered</value>
+    </labels>
+    <labels>
+        <fullName>BLP_OR</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP OR</shortDescription>
+        <value>OR</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Post_Work</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Post Work</shortDescription>
+        <value>Post Work</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Pre_Work</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Pre Work</shortDescription>
+        <value>Pre Work</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Pre_requisite</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Pre-requisite</shortDescription>
+        <value>Pre-requisite</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Profile_Name_For_Course_List</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Profile Name For Course List</shortDescription>
+        <value>System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Rating</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Rating</shortDescription>
+        <value>Rating</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Register</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Register</shortDescription>
+        <value>Register</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Status</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Status</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Tech_Support</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Tech Support</shortDescription>
+        <value>Tech Support</value>
+    </labels>
+    <labels>
+        <fullName>BLP_This_Course_Is</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP This Course Is</shortDescription>
+        <value>This course is</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Title</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Title</shortDescription>
+        <value>Lilly</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Training_Date</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Training Date</shortDescription>
+        <value>Training Date</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Training_Path</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Training Path</shortDescription>
+        <value>Training Path</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Type</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Type</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>BLP_Type_to_Search</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP Type to Search</shortDescription>
+        <value>Type to Search (Min 3 character)</value>
+    </labels>
+    <labels>
+        <fullName>BLP_VIEW_COURSES</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP VIEW COURSES</shortDescription>
+        <value>VIEW COURSES</value>
+    </labels>
+    <labels>
+        <fullName>BLP_View</fullName>
+        <categories>BLP</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BLP View</shortDescription>
+        <value>View</value>
+    </labels>
+</CustomLabels>

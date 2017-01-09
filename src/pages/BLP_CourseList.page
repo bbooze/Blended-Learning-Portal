@@ -1,0 +1,162 @@
+<apex:page sidebar="false" showHeader="false" controller="BLP_CourseListComponentController">
+    
+    <style>
+    
+        #overlay {
+            width: 100%;
+            height: 100%;
+            background: url("{!URLFOR($Resource.BLP_Resources,'/images/loading_spinner.gif')}") no-repeat center #fff;
+            opacity: 0.7;
+            position: fixed;
+            z-index: 5;
+            top: 0;
+            display: none;
+        }
+        
+        .message{
+            margin-top: 42px;
+        }
+    
+    </style>
+    
+    <div id="overlay">
+                
+    </div>
+    
+    <apex:composition template="BLP_Template">
+        <apex:define name="body">
+            <apex:form >
+                <apex:actionFunction action="{!filterList}" name="filterListAF" reRender="listPanel,pageMessage" oncomplete="hideLoading()"/>
+                
+                <div id="page-wrapper">
+                    <div class="container-fluid  no-padding">
+                        <div class="search-bar-container">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <h3>Find Courses</h3>
+                                    </div>
+                                    <div class="form-group search-input  pull-right">
+                                        <apex:inputText id="searchText" value="{!inputSearchText}" html-placeholder="{!$Label.BLP_Type_to_Search}" styleClass="form-control" onkeyup="filterListFunc(this);"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="row">
+                                        <div class="form-group select-training col-sm-4">
+                                            <div class="select-box">
+                                                <apex:selectList Styleclass="form-control" size="1" value="{!TraingTypeSelected}">
+                                                    <apex:selectOptions value="{!trainingTypeList}"/>
+                                                    <apex:actionSupport event="onchange" action="{!filterList}" reRender="listPanel,pageMessage" onsubmit="showLoading()" oncomplete="hideLoading()"/>
+                                                </apex:selectList>
+                                            </div>
+                                        </div>
+                                        <div class="form-group training-path col-sm-5">
+                                            <div class="select-box">
+                                                <apex:selectList Styleclass="form-control" size="1" value="{!TraingPathSelected}">
+                                                    <apex:selectOptions value="{!trainingPathList}"/>
+                                                    <apex:actionSupport event="onchange" action="{!filterList}" reRender="listPanel,pageMessage" onsubmit="showLoading()" oncomplete="hideLoading()"/>
+                                                </apex:selectList>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox form-group training-path col-sm-3" style="padding-top: 10px;">
+                                            <apex:outputPanel id="langCheckBox" rendered="{!showCheckBox}">
+                                                <apex:inputCheckbox value="{!checkBoxVal}" >
+                                                        <apex:actionSupport event="onchange" action="{!filterList}" reRender="listPanel,pageMessage" onsubmit="showLoading()" oncomplete="hideLoading()"/>
+                                                    </apex:inputCheckbox>
+                                                <apex:outputText value="{!$Label.BLP_Language_Specific}"/>
+                                                </apex:outputPanel>
+                                            </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <section class="page-content-main">
+                       
+                            <div class="course-list-wrap">
+                                <div class="sorting-block">
+                                    <div class="form-group sorting ">
+                                        <div class="select-box">
+                                            <apex:selectList Styleclass="form-control" size="1" value="{!sortingSelected}">
+                                                <apex:selectOption itemLabel="A-Z" itemValue="A-Z"/>
+                                                <apex:selectOption itemLabel="Z-A" itemValue="Z-A"/>
+                                                <!--<apex:selectOption itemLabel="Expiration date" itemValue="Expirationdate"/>-->
+                                                <apex:actionSupport event="onchange" action="{!filterList}" reRender="listPanel,pageMessage" onsubmit="showLoading()" oncomplete="hideLoading()"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                </div>
+                                <apex:outputPanel id="listPanel">
+                                    <br/>
+                                    <apex:pagemessages id="pageMessage"></apex:pagemessages>
+                                    <apex:repeat value="{!trainingTypeGroupingMap}" var="outerMap">
+                                        <div class="no-checks course-list-block">
+                                            <h3>{!$Label.BLP_Training_Path}: {!outerMap}</h3>
+                                            <ul class="courses list-unstyled no-padding no-margin">
+                                                <apex:repeat value="{!trainingTypeGroupingMap[outerMap]}" var="innerMap">
+                                                    <li class="courses-category no-margin">
+                                                        <div class="course-category-title">
+                                                            <h4>{!innerMap}</h4>
+                                                        </div>
+                                                        <ul class="courses-category-lists no-padding list-unstyled">
+                                                            <apex:repeat value="{!trainingTypeGroupingMap[outerMap][innerMap]}" var="innerList">
+                                                                <li class="lists-courses no-margin">
+                                                                    <div class="lists-courses-right">
+                                                                        <div class="lists-courses-details">
+                                                                            <!--<h4>{!innerList.courseName }</h4>-->
+                                                                            <h4>
+                                                                                <apex:commandLink action="{!redirectUser}" value="{!innerList.courseName}" title="{!innerList.courseName}" reRender="none">
+                                                                                    <apex:param value="{!innerList.CourseId}" assignTo="{!selectedCourseId}" name="param1"/>
+                                                                                </apex:commandLink>
+                                                                            </h4>
+                                                                            <ul class="minor-details list-inline">
+                                                                                <li style="display:{!IF(AND(innerList.Type != null, innerList.Type != ''),'','none')}">
+                                                                                    <label>Type</label>
+                                                                                    {!innerList.Type} 
+                                                                                </li>
+                                                                                <li style="display:{!IF(AND(innerList.trainingDate != null, innerList.trainingDate != ''),'','none')}">
+                                                                                    <label>Training Date</label>
+                                                                                    {!innerList.trainingDate}
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="training-course-status" style="display:{!IF(innerList.isMandatory,'','none')}">
+                                                                            <div class="status mandatory">
+                                                                                <h5>Mandatory</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </apex:repeat>
+                                                        </ul>
+                                                    </li>
+                                                </apex:repeat>
+                                            </ul>
+                                        </div>
+                                    </apex:repeat>
+                                </apex:outputPanel>
+                            </div>
+                            <div class="clearfix"></div>
+                        </section>
+                    </div>
+                </div>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+    <script>
+        function filterListFunc(currentValue){
+            var value = currentValue.value;
+            if(value == '' || value.length >= 3){
+                showLoading();
+                filterListAF();
+            }
+        }
+        
+        function showLoading(){
+            document.getElementById('overlay').style.display = 'block';
+        }
+        
+        function hideLoading(){
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</apex:page>

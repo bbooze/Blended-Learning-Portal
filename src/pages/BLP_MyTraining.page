@@ -1,0 +1,182 @@
+<apex:page sidebar="false" showHeader="false" controller="BLP_MyTrainingComponentController">
+    
+    <script>
+        function renderCircles(val, iterationCount) {
+            var c;
+            var valVisible = val * 100;
+            if(val == 0.01){
+            valVisible = 0.0;   
+            }
+            c = $('.circle_'+iterationCount+'.circle');
+            c.circleProgress({
+            startAngle: -Math.PI / 4 * 2,
+            value: val,
+            lineCap: 'round',
+            thickness: 10,
+            emptyFill: 'rgb(255, 255, 255)',
+            fill: {color: '#e84f49'}
+            }).on('circle-animation-progress', function(event, progress) {
+            $(this).find('strong').html(parseInt(valVisible * progress) + '<i>%</i>');
+            });
+            iterationCount++;
+        }
+        jQuery(document).ready(function($) {
+            var iterationCount = 0;
+            <apex:repeat value="{!TrainingPathWrapperList}" var="trainWrap">
+                console.log('{!trainWrap.completedCoursePercent}');
+                renderCircles('{!trainWrap.completedCoursePercent}', iterationCount);
+                iterationCount++;    
+            </apex:repeat>
+        });
+    </script>
+    <apex:form >
+    <apex:composition template="BLP_Template">
+        <apex:define name="body">
+            <div id="page-wrapper">
+                <div class="container-fluid  no-padding">
+                    <section class="page-content-main">
+                <div class="page-title">
+                    <h2>{!$Label.BLP_My_Training}</h2>
+                </div>
+                <apex:pageMessages />
+                <div class="accordian-training">
+                    <div class="panel-group" id="training-path-boxes">
+                      <apex:variable value="{!0}" var="trainCount"/>  
+                      <apex:repeat value="{!TrainingPathWrapperList}" var="trainWrap">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading accordion-toggle box-toggle collapsed" data-toggle="collapse" data-parent="#training-path-boxes" data-target="#box{!trainCount}">
+                                <div class="course-detail-container">
+                                    <div class="training-circle">
+                                        <div data-value="" class="circle_{!trainCount} circle"> 
+                                            <strong class="percentage_{!trainCount}"></strong> 
+                                            <span class="percentage-value"></span> 
+                                        </div>
+                                    </div>
+                                    <div class="training-details-wrap">
+                                        <div class="training-course-details">
+                                            <div class="training-title">
+                                                <h4>{!$Label.BLP_Training_Path}: {!trainWrap.trainPath.Name}</h4>
+                                            </div>
+                                            <p>{!trainWrap.trainPath.BLP_Description__c}</p>
+                                            <a href="#">{!$Label.BLP_VIEW_COURSES}<i class="zmdi zmdi-chevron-right"></i></a></div>
+                                            <div class="training-course-status">
+                                                <div class="status completed">
+                                                    <h5>{!$Label.BLP_Completed}</h5>
+                                                    <div class="status-count">{!trainWrap.completedCourseCount} of {!trainWrap.totalCourseCount}</div>
+                                                </div>
+                                                <div class="status mandatory">
+                                                    <h5>{!$Label.BLP_Mandatory}</h5>
+                                                    <div class="status-count">{!trainWrap.mandatoryCourseCount} of {!trainWrap.totalCourseCount}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="box{!trainCount}" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                      <apex:repeat value="{!trainWrap.courseCategoryToCourseListMap}" var="courseCategory">    
+                                        <ul class="courses no-padding list-unstyled no-margin">
+                                            <li class="courses-category">
+                                                <div class="course-category-title">
+                                                    <h4>{!courseCategory}</h4>
+                                                </div>
+                                                <ul class="courses-category-lists no-padding list-unstyled">
+                                                  <apex:repeat value="{!trainWrap.courseCategoryToCourseListMap[courseCategory]}" var="course">  
+                                                    <li class="lists-courses {!IF(courseToUserToCourseMap[course.Id].status == 'Completed', 'course-complete', '')}">
+                                                        <div class="lists-courses-right">
+                                                            <div class="lists-courses-details">
+                                                                <h4>
+                                                                    <!--<a href="/{!course.Id}">{!course.BLP_Course_Name__c}</a>-->
+                                                                    <apex:commandLink action="{!redirectUser}" value="{!course.BLP_Course_Name__c}" title="{!course.BLP_Course_Name__c}" reRender="none">
+                                                                        <apex:param value="{!course.Id}" assignTo="{!selectedCourseId}" name="param1"/>
+                                                                    </apex:commandLink>
+                                                                </h4>
+                                                                <ul class="minor-details list-inline">
+                                                                    <li>
+                                                                        <label>{!$Label.BLP_Type}</label>
+                                                                        {!course.BLP_Course_Format__c}
+                                                                    </li>
+                                                                    
+                                                                    <li>
+                                                                        <apex:outputPanel rendered="{!courseToUserToCourseMap[course.Id].trainingDate != Null}">
+                                                                        <label>{!$Label.BLP_Training_Date}</label>
+                                                                        {!courseToUserToCourseMap[course.Id].trainingDate}
+                                                                        </apex:outputPanel>        
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="training-course-status">
+                                                                <div class="status {!IF(courseToUserToCourseMap[course.Id].status == 'Completed', 'completed', 'in-progress')}">
+                                                                    <h5>{!courseToUserToCourseMap[course.Id].status}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                  </apex:repeat>  
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                      </apex:repeat>    
+                                    </div>
+                                </div>
+                            </div>
+                        <apex:variable var="trainCount" value="{!trainCount + 1}"/> 
+                      </apex:repeat>
+                  </div>
+                </div>
+                
+                        <section class="add-subscribe-cources">
+                            <div class="ad-subs-course-container">
+                                <h3 style="{!IF(AddidtionalCoursesList.Size > 0, '', 'display:none;')}">{!$Label.BLP_Additional_Subscribed_Courses}</h3>
+                                <ul class="courses-category-lists no-padding list-unstyled">
+                                    <apex:repeat value="{!AddidtionalCoursesList}" var="courses">
+                                        <li class="lists-courses no-margin">
+                                            <div class="lists-courses-right">
+                                                <div class="lists-courses-details">
+                                                    <h4>
+                                                        <!--<a href="{!IF(OR(courses.CourseType == 'Face to Face',courses.CourseType == 'Virtual Classroom'),IF(OR(courses.userToCourseStatus == 'Registered',courses.userToCourseStatus == 'Registered Without Date'),$Page.BLP_CourseDetailRegistered,$Page.BLP_CourseDetailUnregistered),$Page.BLP_CourseDetailLink)+'?courseId='+courses.CourseId}">{!courses.CourseName}</a>-->
+                                                        
+                                                        <apex:commandLink action="{!redirectUser}" value="{!courses.CourseName}" title="{!courses.CourseName}" reRender="none">
+                                                            <apex:param value="{!courses.CourseId}" assignTo="{!selectedCourseId}" name="param1"/>
+                                                        </apex:commandLink>
+                                                    </h4>
+                                                    <ul class="minor-details list-inline" style="margin-top:10px;">
+                                                        <li class="no-margin" style="display:{!IF(AND(courses.CourseType != null && courses.CourseType != ''),'','none')};">
+                                                            <label>{!$Label.BLP_Type}</label>
+                                                            {!courses.CourseType} 
+                                                        </li>
+                                                        <li class="no-margin" style="display:{!IF(courses.CourseTrainingDate != null ,'','none')};">
+                                                            <label>{!$Label.BLP_Training_Date}</label>
+                                                            <apex:outputText value="{0,date,MM/dd/yy}"> 
+                                                                <apex:param value="{!courses.CourseTrainingDate}" /> 
+                                                            </apex:outputText>
+                                                        </li>
+                                                        <li class="no-margin" style="display:{!IF(AND(courses.CourseLocation != null && courses.CourseLocation != ''),'','none')};">
+                                                            <label>{!$Label.BP_Location}</label>
+                                                            {!courses.CourseLocation}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="training-course-status">
+                                                    <div class="status mandatory">
+                                                        <h5>
+                                                            <apex:outputPanel rendered="{!courses.CourseMandatory}">
+                                                                <strong>{!$Label.BLP_Mandatory}</strong>
+                                                            </apex:outputPanel>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </apex:repeat>
+                                </ul>
+                            </div>
+                        </section>
+                        <div class="clearfix"></div>
+                    </section>
+                </div>
+            </div>
+        </apex:define>
+    </apex:composition>
+    </apex:form>
+</apex:page>

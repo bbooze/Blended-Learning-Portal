@@ -1,0 +1,65 @@
+<apex:page showHeader="false" sideBar="false" standardStyleSheets="true"> 
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <meta name="format-detection" content="telephone=no"/>
+        <title>{!$Label.BLP_Title}</title>
+        
+        <!-- Bootstrap core CSS -->
+        <apex:stylesheet value="{!URLFOR($Resource.BLP_Resources, 'css/bootstrap.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.BLP_Resources, 'css/material-design-iconic-font.min.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.BLP_Resources, 'css/style.css')}"/>
+        
+        <!-- Javascript files -->
+        <apex:includeScript value="{!URLFOR($Resource.BLP_Resources, 'js/jquery-1.11.3.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.BLP_Resources, 'js/bootstrap.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.BLP_Resources, 'js/circle-progress.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.BLP_Resources, 'js/scripts.js')}"/>
+        
+    </head>
+    
+    <style>
+    
+        #overlay {
+            width: 100%;
+            height: 100%;
+            background: url("{!URLFOR($Resource.BLP_Resources,'/images/loading_spinner.gif')}") no-repeat center #fff;
+            opacity: 0.7;
+            position: fixed;
+            z-index: 5;
+            top: 0;
+            display: none;
+        }
+        
+    </style>
+    
+    <body>
+        <div id="wrapper"> 
+            <!--  Header area -->
+            <apex:insert name="header" >
+                <c:BLP_Header />
+            </apex:insert>
+            <!--  Content area -->
+            <div>
+                <apex:insert name="body"/>
+            </div>   
+            <!--  Footer area -->
+            <apex:insert name="footer" >
+                <c:BLP_Footer />
+            </apex:insert>
+        </div>
+    </body>
+    
+    <script>
+        function showLoading(){
+            document.getElementById('overlay').style.display = 'block';
+        }
+        
+        function hideLoading(){
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</apex:page>

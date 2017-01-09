@@ -1,0 +1,7 @@
+Hello,
+<br><br>
+You have a session on {!BLP_Training_Dates__c.00N26000000xG7u}.
+<br>
+Total number or attendees are {!BLP_Training_Dates__c.BLP_Number_of_Attendees_Registered__c} 
+<br><br>
+Thanks

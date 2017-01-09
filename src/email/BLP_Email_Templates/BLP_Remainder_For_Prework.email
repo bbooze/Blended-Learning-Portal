@@ -1,0 +1,7 @@
+<messaging:emailTemplate subject="Remainder: Prework Due before Training Begins" recipientType="User" relatedToType="BLP_User_To_Course__c">
+<messaging:htmlEmailBody >
+Hi {!relatedTo.BLP_UserName__c},<BR/>
+<BR/>
+Please Complete your remaining Prework {!relatedTo.BLP_Prework_Not_Completed__c} for the Course {!relatedTo.BLP_Course_Name__c} before the Course Starts on {!relatedTo.BLP_Training_Date__c}.<BR/> 
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>
